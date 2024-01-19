@@ -80,4 +80,4 @@ if (true) {
 
 # Collection
 
-<img src='https://github.com/YeonguChoe/JVM/blob/c4d2f7966f820af7c962bfd85e0671a70e7d4115/Programming%20Language/Java/Image/Collection.gif'>
+<img src='https://github.com/YeonguChoe/JVM/Programming Language/Java/Image/Collection.gif'>
