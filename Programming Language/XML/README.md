@@ -1,2 +1,4 @@
-# XML 언어
+# XML
+- Language similar to HTML
+
 
