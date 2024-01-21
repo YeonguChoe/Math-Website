@@ -77,7 +77,3 @@ if (true) {
 | `char`    | 16 bit  |                      | '0'           |
 
 ---
-
-# Collection
-
-<img src='https://github.com/YeonguChoe/JVM/blob/main/Programming%20Language/Java/Image/Collection.gif'>
