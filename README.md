@@ -1,1 +1,4 @@
-# Website project
+# BYBIT Automated Trading System
+## Techstack
+- Python
+- OOP
