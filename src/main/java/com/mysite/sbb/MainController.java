@@ -12,4 +12,10 @@ public class MainController {
     public String getMethodName() {
         return "가나다라마바사아";
     }
+
+    @GetMapping("/")
+    public String root() {
+        return "redirect:/question/list";
+    }
+
 }

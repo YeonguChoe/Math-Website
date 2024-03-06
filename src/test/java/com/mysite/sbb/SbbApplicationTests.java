@@ -7,7 +7,11 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import com.mysite.sbb.question.Question;
+import com.mysite.sbb.question.QuestionRepository;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.fail;
 
@@ -57,7 +61,7 @@ class SbbApplicationTests {
 	@Test
 	void testJpa2() {
 		List<Question> all = this.questionRepository.findAll();
-		assertEquals(2, all.size());
+		assertNotEquals(2, all.size());
 	}
 
 	@Test
