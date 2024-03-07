@@ -32,6 +32,9 @@ public class Question {
 
     private LocalDateTime createDate;
 
+
+    // Question이 1개이고 answer이 여러개 이다
+    // Question 1개에 등록된 answer의 리스트이다
     @OneToMany(mappedBy = "question", cascade = CascadeType.REMOVE)
     private List<Answer> answerList;
 }

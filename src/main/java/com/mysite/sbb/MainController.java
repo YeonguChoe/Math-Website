@@ -13,6 +13,8 @@ public class MainController {
         return "가나다라마바사아";
     }
 
+
+    // Root로 접근하면 자동으로 /question/list로 이동하게 하는 코드
     @GetMapping("/")
     public String root() {
         return "redirect:/question/list";
