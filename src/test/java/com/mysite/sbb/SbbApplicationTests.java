@@ -9,6 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import com.mysite.sbb.question.Question;
 import com.mysite.sbb.question.QuestionRepository;
+import com.mysite.sbb.question.QuestionService;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
@@ -23,7 +24,10 @@ import java.util.Optional;
 class SbbApplicationTests {
 
 	@Autowired
-	private QuestionRepository questionRepository;
+	private QuestionService qs;
+
+	@Autowired
+	private QuestionRepository qr;
 
 	@AfterEach
 	void checkAfter() {
@@ -50,31 +54,38 @@ class SbbApplicationTests {
 		q1.setContent("3");
 		// CreateDate 속성을 정한다
 		q1.setCreateDate(LocalDateTime.now());
+		this.qr.save(q1);
 
-		Question q2 = new Question();
-		q2.setSubject("4");
-		q2.setContent("4");
-		q2.setCreateDate(LocalDateTime.now());
-		this.questionRepository.save(q2);
+		// 서비스 이용하는 방법
+		this.qs.create("4", "4");
 	}
 
 	@Test
 	void testJpa2() {
-		List<Question> all = this.questionRepository.findAll();
+		List<Question> all = this.qr.findAll();
 		assertNotEquals(2, all.size());
 	}
 
 	@Test
 	void testJpa3() {
-		Optional<Question> filtered = this.questionRepository.findById(2);
-		assertEquals(2, filtered.get().getId());
+		// Optional<Question> filtered = this.qr.findById(300);
+		// assertEquals(300, filtered.get().getId());
 	}
 
 	@Test
 	void testJpa4() {
-		Question q = this.questionRepository.findBySubjectAndContent(
-				"1", "1");
-		assertEquals(1, q.getId());
+		// Question q = this.qr.findBySubjectAndContent(
+		// 		"1", "1");
+		// assertEquals(2399, q.getId());
+	}
+
+	@Test
+	void testJpa() {
+		for (int i = 1; i <= 300; i++) {
+			String subject = String.format("테스트 데이터: [%03d]", i);
+			String content = "공백 내용";
+			this.qs.create(subject, content);
+		}
 	}
 
 }

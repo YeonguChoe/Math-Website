@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import jakarta.validation.Valid;
 import org.springframework.validation.BindingResult;
 
+import org.springframework.data.domain.Page;
+
 // RequestMapping에 경로를 적어주면, 아래의 GetMapping에서 나머지 주소만 적어주면 된다
 @RequestMapping("/question")
 @RequiredArgsConstructor
@@ -30,17 +32,17 @@ public class QuestionController {
     private final QuestionService qs;
 
     @GetMapping("/list")
-    public String list(Model model) {
+    public String list(Model model, @RequestParam(value = "page", defaultValue = "0") int page) {
         // 직접 받아 오는 방법
         // List<Question> questionListInput = qr.findAll();
 
         // 서비스로부터 받아오는 방법
-        List<Question> ql = qs.getList();
+        Page<Question> pg = this.qs.getList(page);
 
-        // ql변수를 Model 객체에 추가하여 question_list.html에 넘겨 준다.
+        // pg변수를 Model 객체에 추가하여 question_list.html에 넘겨 준다.
         // model은 html파일을 의미한다
-        // x는 html파일에서 사용될 변수의 이름이다
-        model.addAttribute("questionList", ql);
+        // attributeName인 "paging"은 html파일에서 사용될 변수의 이름이다
+        model.addAttribute("paging", pg);
 
         return "question_list";
     }
