@@ -58,4 +58,16 @@ public class QuestionService {
         question.setModifyDate(LocalDateTime.now());
         this.qr.save(question);
     }
+
+    // 게시물 삭제
+    public void delete(Question question) {
+        this.qr.delete(question);
+    }
+
+    // 투표
+    public void vote(Question question, SiteUser siteUser) {
+        // 추천인 추가
+        question.getVoter().add(siteUser);
+        this.qr.save(question);
+    }
 }

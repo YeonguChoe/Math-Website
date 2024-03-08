@@ -46,18 +46,18 @@ class SbbApplicationTests {
 
 	@Test
 	void testJpa1() {
-		// row 1개를 생성한다.
-		Question q1 = new Question();
-		// Subject 속성을 정한다
-		q1.setSubject("3");
-		// Content 속성을 정한다
-		q1.setContent("3");
-		// CreateDate 속성을 정한다
-		q1.setCreateDate(LocalDateTime.now());
-		this.qr.save(q1);
+		// // row 1개를 생성한다.
+		// Question q1 = new Question();
+		// // Subject 속성을 정한다
+		// q1.setSubject("3");
+		// // Content 속성을 정한다
+		// q1.setContent("3");
+		// // CreateDate 속성을 정한다
+		// q1.setCreateDate(LocalDateTime.now());
+		// this.qr.save(q1);
 
-		// 서비스 이용하는 방법
-		this.qs.create("4", "4", null);
+		// // 서비스 이용하는 방법
+		// this.qs.create("4", "4", null);
 	}
 
 	@Test

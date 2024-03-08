@@ -9,12 +9,15 @@ import lombok.RequiredArgsConstructor;
 
 import java.security.Principal;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.server.ResponseStatusException;
 
 import jakarta.validation.Valid;
 import org.springframework.validation.BindingResult;
@@ -44,5 +47,53 @@ public class AnswerController {
         this.as.create(question, answerForm.getContent(), siteUser);
         // 반환값은 새로고침하는 기능을한다
         return String.format("redirect:/question/detail/%s", id);
+    }
+
+    // 댓글 수정 Get 메소드
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping("/modify/{id}")
+    public String answerModify(AnswerForm answerForm, @PathVariable("id") Integer id, Principal currentLoggedInUser) {
+        Answer answer = this.as.getAnswer(id);
+        if (!answer.getAuthor().getUsername().equals(currentLoggedInUser.getName())) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "수정 권한이 없습니다");
+        }
+        answerForm.setContent(answer.getContent());
+        return "answer_form";
+    }
+
+    // 댓글 수정 Post 메소드
+    @PreAuthorize("isAuthenticated()")
+    @PostMapping("/modify/{id}")
+    public String answerModify(@Valid AnswerForm answerForm,
+            BindingResult bindingResult, @PathVariable("id") Integer id, Principal currentLoggedInUser) {
+        if (bindingResult.hasErrors()) {
+            return "answer_form";
+        }
+        Answer answer = this.as.getAnswer(id);
+        if (!answer.getAuthor().getUsername().equals(currentLoggedInUser.getName())) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "수정 권한이 없습니다");
+        }
+        this.as.modify(answer, answerForm.getContent());
+        return String.format("redirect:/question/detail/%s", answer.getQuestion().getId());
+    }
+
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping("/delete/{id}")
+    public String answerDelete(@PathVariable("id") Integer id, Principal currentLoggedInUser) {
+        Answer answer = this.as.getAnswer(id);
+        if (!answer.getAuthor().getUsername().equals(currentLoggedInUser.getName())) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "삭제 권한이 없습니다");
+        }
+        this.as.delete(answer);
+        return String.format("redirect:/question/detail/%s", answer.getQuestion().getId());
+    }
+
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping("/vote/{id}")
+    public String answerVote(@PathVariable("id") Integer id, Principal currentLoggedInUser) {
+        Answer answer = this.as.getAnswer(id);
+        SiteUser siteUser = this.us.getUser(currentLoggedInUser.getName());
+        this.as.vote(answer, siteUser);
+        return String.format("redirect:/question/detail/%s", answer.getQuestion().getId());
     }
 }

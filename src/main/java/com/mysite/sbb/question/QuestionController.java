@@ -116,4 +116,26 @@ public class QuestionController {
         this.qs.modify(question, questionForm.getSubject(), questionForm.getContent());
         return String.format("redirect:/question/detail/%s", id);
     }
+
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping("/delete/{id}")
+    public String questionDelete(@PathVariable("id") Integer id, Principal currentLoggedInUser) {
+        Question question = this.qs.getQuestion(id);
+        if (!question.getAuthor().getUsername().equals(currentLoggedInUser.getName())) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "삭제 권한이 없습니다");
+        }
+        this.qs.delete(question);
+        // 삭제 이후 다시 돌아옴
+        return "redirect:/";
+    }
+
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping("/vote/{id}")
+    public String questionVote(@PathVariable("id") Integer id, Principal currentLoggedInUser) {
+        Question question = this.qs.getQuestion(id);
+        SiteUser siteUser = this.us.getUser(currentLoggedInUser.getName());
+        this.qs.vote(question, siteUser);
+        return String.format("redirect:/question/detail/%s", id);
+    }
+
 }

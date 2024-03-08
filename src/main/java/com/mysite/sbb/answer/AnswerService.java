@@ -8,6 +8,9 @@ import com.mysite.sbb.user.SiteUser;
 import lombok.RequiredArgsConstructor;
 import java.time.LocalDateTime;
 
+import java.util.Optional;
+import com.mysite.sbb.DataNotFoundException;
+
 @RequiredArgsConstructor
 @Service
 public class AnswerService {
@@ -23,4 +26,27 @@ public class AnswerService {
         this.ar.save(answer);
     }
 
+    public Answer getAnswer(Integer id) {
+        Optional<Answer> answer = this.ar.findById(id);
+        if (answer.isPresent()) {
+            return answer.get();
+        } else {
+            throw new DataNotFoundException("댓글을 찾을수 없습니다");
+        }
+    }
+
+    public void modify(Answer answer, String content) {
+        answer.setContent(content);
+        answer.setModifyDate(LocalDateTime.now());
+        this.ar.save(answer);
+    }
+
+    public void delete(Answer answer) {
+        this.ar.delete(answer);
+    }
+
+    public void vote(Answer answer, SiteUser siteUser) {
+        answer.getVoter().add(siteUser);
+        this.ar.save(answer);
+    }
 }
