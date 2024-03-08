@@ -40,17 +40,19 @@ public class QuestionController {
     private final UserService us;
 
     @GetMapping("/list")
-    public String list(Model model, @RequestParam(value = "page", defaultValue = "0") int page) {
+    public String list(Model model, @RequestParam(value = "page", defaultValue = "0") int page,
+            @RequestParam(value = "kw", defaultValue = "") String kw) {
         // 직접 받아 오는 방법
         // List<Question> questionListInput = qr.findAll();
 
         // 서비스로부터 받아오는 방법
-        Page<Question> pg = this.qs.getList(page);
+        Page<Question> pg = this.qs.getList(page, kw);
 
         // pg변수를 Model 객체에 추가하여 question_list.html에 넘겨 준다.
         // model은 html파일을 의미한다
         // attributeName인 "paging"은 html파일에서 사용될 변수의 이름이다
         model.addAttribute("paging", pg);
+        model.addAttribute("kw", kw);
 
         return "question_list";
     }
