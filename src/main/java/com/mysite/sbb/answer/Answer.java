@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 
 import com.mysite.sbb.question.Question;
 
+import com.mysite.sbb.user.SiteUser;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -26,9 +27,11 @@ public class Answer {
 
     private LocalDateTime createDate;
 
-
     // Question 1개에 Answer이 여러개 다릴수 있게 한다
     // 답변이 Many, 질문이 One이다.
     @ManyToOne
     private Question question;
+
+    @ManyToOne
+    private SiteUser author;
 }

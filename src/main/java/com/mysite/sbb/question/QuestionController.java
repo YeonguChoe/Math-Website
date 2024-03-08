@@ -1,8 +1,13 @@
 package com.mysite.sbb.question;
 
+import java.security.Principal;
 import java.util.List;
 
+import org.springframework.security.access.prepost.PreAuthorize;
+
 import com.mysite.sbb.answer.AnswerForm;
+import com.mysite.sbb.user.SiteUser;
+import com.mysite.sbb.user.UserService;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,6 +35,7 @@ public class QuestionController {
 
     // 중간에 서비스를 두고 서비스로 부터 받아오는 방법
     private final QuestionService qs;
+    private final UserService us;
 
     @GetMapping("/list")
     public String list(Model model, @RequestParam(value = "page", defaultValue = "0") int page) {
@@ -56,19 +62,26 @@ public class QuestionController {
     }
 
     // 게시물 생성 버튼을 눌렀을때 게시물을 삭제하는 메소드
+    @PreAuthorize("isAuthenticated()")
     @GetMapping("/create")
     public String goToQuestionForm(QuestionForm questionForm) {
         return "question_form";
     }
 
     // 질문 생성에 대한 메소드
+    @PreAuthorize("isAuthenticated()")
     @PostMapping("/create")
-    public String createQuestion(@Valid QuestionForm questionForm, BindingResult bindingResult) {
+    public String createQuestion(@Valid QuestionForm questionForm, BindingResult bindingResult,
+            Principal currentLogedInUser) {
         if (bindingResult.hasErrors()) {
             return "question_form";
         } else {
+
+            // 서비스에서 사용자 이름 받아오기
+            SiteUser author = this.us.getUser(currentLogedInUser.getName());
+
             // form 검사에서 성공한 경우
-            this.qs.create(questionForm.getSubject(), questionForm.getContent());
+            this.qs.create(questionForm.getSubject(), questionForm.getContent(), author);
         }
         return "redirect:/question/list";
     }

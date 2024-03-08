@@ -57,7 +57,7 @@ class SbbApplicationTests {
 		this.qr.save(q1);
 
 		// 서비스 이용하는 방법
-		this.qs.create("4", "4");
+		this.qs.create("4", "4", null);
 	}
 
 	@Test
@@ -75,17 +75,17 @@ class SbbApplicationTests {
 	@Test
 	void testJpa4() {
 		// Question q = this.qr.findBySubjectAndContent(
-		// 		"1", "1");
+		// "1", "1");
 		// assertEquals(2399, q.getId());
 	}
 
 	@Test
 	void testJpa() {
-		for (int i = 1; i <= 300; i++) {
-			String subject = String.format("테스트 데이터: [%03d]", i);
-			String content = "공백 내용";
-			this.qs.create(subject, content);
-		}
+		// for (int i = 1; i <= 300; i++) {
+		// String subject = String.format("테스트 데이터: [%03d]", i);
+		// String content = "공백 내용";
+		// this.qs.create(subject, content, null);
+		// }
 	}
 
 }
