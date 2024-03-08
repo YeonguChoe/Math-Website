@@ -21,10 +21,10 @@ import com.mysite.sbb.user.SiteUser;
 @Service
 public class QuestionService {
 
-    private final QuestionRepository questionRepository;
+    private final QuestionRepository qr;
 
     public Question getQuestion(Integer id) {
-        Optional<Question> question = this.questionRepository.findById(id);
+        Optional<Question> question = this.qr.findById(id);
         if (question.isPresent()) {
             return question.get();
         } else {
@@ -40,7 +40,7 @@ public class QuestionService {
         question.setCreateDate(LocalDateTime.now());
         question.setAuthor(author);
         // 만든 후 저장
-        this.questionRepository.save(question);
+        this.qr.save(question);
     }
 
     // 페이지 만드는 방법
@@ -48,6 +48,14 @@ public class QuestionService {
         List<Sort.Order> sorts = new ArrayList<>();
         sorts.add(Sort.Order.desc("createDate"));
         Pageable pageable = PageRequest.of(page, 10, Sort.by(sorts));
-        return this.questionRepository.findAll(pageable);
+        return this.qr.findAll(pageable);
+    }
+
+    // 게시물 수정
+    public void modify(Question question, String subject, String content) {
+        question.setSubject(subject);
+        question.setContent(content);
+        question.setModifyDate(LocalDateTime.now());
+        this.qr.save(question);
     }
 }

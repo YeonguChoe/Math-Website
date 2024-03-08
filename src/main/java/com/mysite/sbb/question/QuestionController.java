@@ -18,11 +18,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.server.ResponseStatusException;
 
 import jakarta.validation.Valid;
 import org.springframework.validation.BindingResult;
 
 import org.springframework.data.domain.Page;
+import org.springframework.http.HttpStatus;
 
 // RequestMapping에 경로를 적어주면, 아래의 GetMapping에서 나머지 주소만 적어주면 된다
 @RequestMapping("/question")
@@ -86,4 +88,32 @@ public class QuestionController {
         return "redirect:/question/list";
     }
 
+    // 게시글 수정 메소드 (Get)
+    @PreAuthorize("isAuthenticated()")
+    @GetMapping("/modify/{id}")
+    public String questionModify(QuestionForm questionForm, @PathVariable("id") Integer id, Principal principal) {
+        Question question = this.qs.getQuestion(id);
+        if (!question.getAuthor().getUsername().equals(principal.getName())) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "수정권한이 없습니다.");
+        }
+        questionForm.setSubject(question.getSubject());
+        questionForm.setContent(question.getContent());
+        return "question_form";
+    }
+
+    // 게시글 수정 메소드 (Post)
+    @PreAuthorize("isAuthenticated()")
+    @PostMapping("/modify/{id}")
+    public String questionModify(@Valid QuestionForm questionForm, BindingResult bindingResult,
+            Principal principal, @PathVariable("id") Integer id) {
+        if (bindingResult.hasErrors()) {
+            return "question_form";
+        }
+        Question question = this.qs.getQuestion(id);
+        if (!question.getAuthor().getUsername().equals(principal.getName())) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "수정권한이 없습니다.");
+        }
+        this.qs.modify(question, questionForm.getSubject(), questionForm.getContent());
+        return String.format("redirect:/question/detail/%s", id);
+    }
 }

@@ -26,6 +26,7 @@ public class Answer {
     private String content;
 
     private LocalDateTime createDate;
+    private LocalDateTime modifyDate;
 
     // Question 1개에 Answer이 여러개 다릴수 있게 한다
     // 답변이 Many, 질문이 One이다.
