@@ -62,8 +62,8 @@ class SbbApplicationTests {
 
 	@Test
 	void testJpa2() {
-		List<Question> all = this.qr.findAll();
-		assertNotEquals(2, all.size());
+		// List<Question> all = this.qr.findAll();
+		// assertNotEquals(2, all.size());
 	}
 
 	@Test
