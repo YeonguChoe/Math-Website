@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.fail;
 
 @SpringBootTest
-class SbbApplicationTests {
+class MathApplicationTests {
 
 	@Autowired
 	private QuestionService qs;
