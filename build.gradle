@@ -7,13 +7,13 @@ plugins {
 group = 'com.mysite'
 version = '0.0.1-SNAPSHOT'
 
-// // 로컬에서 빌드할때 자바 21을 사용하려면 다음과 같이 툴체인을 설정해 줘야 한다
-// // 하지만, Cloudtype에 배포 할때는 주석 처리 해줘야 한다
-// java {
-//     toolchain {
-//         languageVersion = JavaLanguageVersion.of(21)
-//     }
-// }
+// 로컬에서 빌드할때 자바 21을 사용하려면 다음과 같이 툴체인을 설정해 줘야 한다
+// 하지만, cloudtype에 배포 할때는 주석 처리 해줘야 한다
+java {
+    // toolchain {
+    //     languageVersion = JavaLanguageVersion.of(21)
+    // }
+}
 
 repositories {
 	mavenCentral()
