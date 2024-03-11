@@ -1,9 +1,9 @@
-package com.mysite.sbb.answer;
+package com.mysite.math.answer;
 
-import com.mysite.sbb.question.Question;
-import com.mysite.sbb.question.QuestionService;
-import com.mysite.sbb.user.SiteUser;
-import com.mysite.sbb.user.UserService;
+import com.mysite.math.question.Question;
+import com.mysite.math.question.QuestionService;
+import com.mysite.math.user.SiteUser;
+import com.mysite.math.user.UserService;
 
 import lombok.RequiredArgsConstructor;
 

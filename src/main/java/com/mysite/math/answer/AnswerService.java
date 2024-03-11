@@ -1,15 +1,15 @@
-package com.mysite.sbb.answer;
+package com.mysite.math.answer;
 
 import org.springframework.stereotype.Service;
 
-import com.mysite.sbb.question.Question;
-import com.mysite.sbb.user.SiteUser;
+import com.mysite.math.question.Question;
+import com.mysite.math.user.SiteUser;
 
 import lombok.RequiredArgsConstructor;
 import java.time.LocalDateTime;
 
 import java.util.Optional;
-import com.mysite.sbb.DataNotFoundException;
+import com.mysite.math.DataNotFoundException;
 
 @RequiredArgsConstructor
 @Service

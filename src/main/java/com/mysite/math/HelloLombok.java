@@ -1,4 +1,4 @@
-package com.mysite.sbb;
+package com.mysite.math;
 
 import lombok.Getter;
 import lombok.Setter;

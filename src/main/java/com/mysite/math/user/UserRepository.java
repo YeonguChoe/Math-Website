@@ -1,4 +1,4 @@
-package com.mysite.sbb.user;
+package com.mysite.math.user;
 
 import java.util.Optional;
 

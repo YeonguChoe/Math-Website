@@ -1,4 +1,4 @@
-package com.mysite.sbb.answer;
+package com.mysite.math.answer;
 
 import jakarta.validation.constraints.NotEmpty;
 import lombok.Getter;

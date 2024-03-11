@@ -1,10 +1,10 @@
-package com.mysite.sbb.question;
+package com.mysite.math.question;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
-import com.mysite.sbb.answer.Answer;
-import com.mysite.sbb.user.SiteUser;
+import com.mysite.math.answer.Answer;
+import com.mysite.math.user.SiteUser;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;

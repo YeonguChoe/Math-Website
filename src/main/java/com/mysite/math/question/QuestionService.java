@@ -1,4 +1,4 @@
-package com.mysite.sbb.question;
+package com.mysite.math.question;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -14,10 +14,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
-import com.mysite.sbb.DataNotFoundException;
-import com.mysite.sbb.user.SiteUser;
+import com.mysite.math.DataNotFoundException;
+import com.mysite.math.user.SiteUser;
 
-import com.mysite.sbb.answer.Answer;
+import com.mysite.math.answer.Answer;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Join;

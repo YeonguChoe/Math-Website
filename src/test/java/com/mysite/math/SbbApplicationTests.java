@@ -1,24 +1,18 @@
-package com.mysite.sbb;
+package com.mysite.math;
 
-import org.aspectj.lang.annotation.Before;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.mysite.sbb.question.Question;
-import com.mysite.sbb.question.QuestionRepository;
-import com.mysite.sbb.question.QuestionService;
+import com.mysite.math.question.QuestionRepository;
+import com.mysite.math.question.QuestionService;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.fail;
-
-import java.time.LocalDateTime;
-import java.util.List;
-import java.util.Optional;
 
 @SpringBootTest
 class SbbApplicationTests {

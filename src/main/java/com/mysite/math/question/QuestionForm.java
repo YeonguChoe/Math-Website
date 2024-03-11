@@ -1,4 +1,4 @@
-package com.mysite.sbb.question;
+package com.mysite.math.question;
 
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
