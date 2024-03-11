@@ -9,9 +9,9 @@ version = '0.0.1-SNAPSHOT'
 
 // 자바 21을 사용하려면 다음과 같이 툴체인을 설정해 줘야 한다
 java {
-    toolchain {
-        languageVersion = JavaLanguageVersion.of(21)
-    }
+    // toolchain {
+    //     languageVersion = JavaLanguageVersion.of(21)
+    // }
 }
 
 repositories {
