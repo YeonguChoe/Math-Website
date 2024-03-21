@@ -7,6 +7,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class AnswerForm {
-    @NotEmpty(message = "댓글의 내용이 비어 있습니다.")
+    @NotEmpty(message = "Text box is empty")
     private String content;
 }

@@ -31,7 +31,7 @@ public class AnswerService {
         if (answer.isPresent()) {
             return answer.get();
         } else {
-            throw new DataNotFoundException("댓글을 찾을수 없습니다");
+            throw new DataNotFoundException("I cannot find the reply");
         }
     }
 
